@@ -6,6 +6,12 @@
 <body>
 <h1>User, welcome spring boot security page!</h1>
 
+<p th:if="${userDetails}" th:text="'User ID: ' + ${userDetails.username}"></p>
+
+<a class="button" th:href="@{/info}">Получить информацию</a>
 
 </body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
 </html>

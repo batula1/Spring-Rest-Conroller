@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            border: 3px solid black;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div th:switch="${admin}">
+    <h2 th:case="null">No users found!</h2>
+    <div th:case="*">
+        <table border="3px">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Email</th>
+
+                <th th:colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${admin}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.surname}"></td>
+                <td th:text="${user.age}"></td>
+                <td th:text="${user.email}"></td>
+
+                <td>
+                    <a type="button" class="button" th:href="@{/admin/user-form(id=${user.id})}">
+                        <button type="button">Edit</button>
+                    </a>
+                </td>
+                <td>
+                    <a type="button" class="button" th:href="@{/admin/delete/{id}(id=${user.id})}">
+                    <button type="button">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+  <button  type="button" class="button" th:onclick="location.href='/admin/user-form'">Add</button>
+</div>
+</body>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
+</html>

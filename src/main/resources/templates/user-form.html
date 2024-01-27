@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+    <style>
+        /* Стили для центрирования формы */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            border: 3px solid black;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<form action="#" th:action="@{/admin/user-form}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}"> <!-- Скрытое поле для идентификатора пользователя (может быть пустым) -->
+
+    <label for="name">Name:</label>
+    <input type="text" th:field="*{name}" id="name" required>
+    <br/>
+
+    <label for="surname">Surname:</label>
+    <input type="text" th:field="*{surname}" id="surname" required>
+    <br/>
+
+    <label for="age">Age:</label>
+    <input type="number" th:field="*{age}" id="age" required>
+    <br/>
+
+    <label for="email">Email:</label>
+    <input type="text" th:field="*{email}" id="email" required>
+    <br/>
+
+    <label for="password">Password:</label>
+    <input type="text" th:field="*{password}" id="password" required>
+    <br/>
+
+    <label for="roles">User Roles:</label>
+    <select multiple="multiple" id="roles" th:field="*{roles}">
+        <option value="USER">USER</option>
+        <option value="ADMIN">ADMIN</option>
+    </select>
+       <br/>
+    <input type="submit" value="Save">
+</form>
+</body>
+</html>
